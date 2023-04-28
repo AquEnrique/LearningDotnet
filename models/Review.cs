@@ -6,12 +6,12 @@ namespace NotasApi.models
     public class Review
     {
         [Key]
-        public int IdReview { get; set; }
-        public int IdStudent { get; set; }
+        public long IdReview { get; set; }
+        public long IdStudent { get; set; }
         public string TopicReview { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int ReviewInterval { get; set; }
+        public long ReviewInterval { get; set; }
 
         [ForeignKey(nameof(IdStudent))]
         public Student? Student { get; set; }

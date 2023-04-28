@@ -5,7 +5,7 @@ namespace NotasApi.models
     public class Student
     {
         [Key]
-        public int IdStudent { get; set; }
+        public long IdStudent { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
 

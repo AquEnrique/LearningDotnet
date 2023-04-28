@@ -6,9 +6,9 @@ namespace NotasApi.models
     public class Evaluation
     {
         [Key]
-        public int IdEvaluation { get; set; }
-        public int? IdTeacherCourse { get; set; }
-        public int? IdReview { get; set; }
+        public long IdEvaluation { get; set; }
+        public long? IdTeacherCourse { get; set; }
+        public long? IdReview { get; set; }
 
         [ForeignKey(nameof(IdTeacherCourse))]
         public TeacherCourse? TeacherCourse {get;set;}

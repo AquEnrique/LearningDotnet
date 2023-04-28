@@ -6,10 +6,10 @@ namespace NotasApi.models
     public class TeacherCourse
     {
         [Key]
-        public int IdTeacherCourse { get; set; }
-        public int IdTeacher { get; set; }
-        public int IdSemester { get; set; }
-        public int IdCourse { get; set; }
+        public long IdTeacherCourse { get; set; }
+        public long IdTeacher { get; set; }
+        public long IdSemester { get; set; }
+        public long IdCourse { get; set; }
 
         [ForeignKey(nameof(IdTeacher))]
         public Teacher? Teacher {get;set;}

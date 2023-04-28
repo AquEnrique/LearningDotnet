@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,61 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class AnswerController : ControllerBase
     {
-        private Context _context;
-        public AnswerController(Context context)
+        private AnswerBusinessService _answerBusinessService;
+        public AnswerController(AnswerBusinessService answerBusinessService)
         {
-            _context = context;
+            _answerBusinessService = answerBusinessService;
         }
 
         // Get Answers
         [HttpGet]
         public IEnumerable<Answer> GetAnswers()
         {
-            return _context.Answers.ToList();
+            return _answerBusinessService.GetAnswers();
         }
 
-        //Get one answer
+        //Get one Answer
         [HttpGet("{id}")]
         public Answer? GetAnswer(long id)
         {
-            var answer = _context.Answers.Find(id);
-            return answer;
+            return _answerBusinessService.GetAnswer(id);
         }
 
         //Insert Answer
         [HttpPost]
         public Answer InsertAnswer(Answer answer)
         {
-            _context.Answers.Add(answer);
-            _context.SaveChanges();
-            return answer;
+            return _answerBusinessService.InsertAnswer(answer);
         }
 
-        //Update answer
+        //Update Answer
         [HttpPut]
         public Answer? UpdateAnswer(Answer answer)
         {
-            var answerDbo = _context.Answers.Find(answer.IdAnswer);
-
-            if (answerDbo == null) return null;
-
-            /*answerDbo.Name = answer.Name;
-            answerDbo.IdProfSchool = answer.IdProfSchool;*/
-            _context.SaveChanges();
-            return answerDbo;
+            return _answerBusinessService.UpdateAnswer(answer);
         }
 
-        //Delete answer
+        //Delete Answer
         [HttpDelete("{id}")]
         public bool DeleteAnswer(long id)
         {
-            var answerDbo = _context.Answers.Find(id);
-            if (answerDbo == null) return false;
-
-            _context.Answers.Remove(answerDbo);
-            _context.SaveChanges();
-            return true;
+            return _answerBusinessService.DeleteAnswer(id);
         }
-
     }
 }

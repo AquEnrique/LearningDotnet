@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,65 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class QuestionAlternativeController : ControllerBase
     {
-        private Context _context;
-        public QuestionAlternativeController(Context context)
+        private QuestionAlternativeBusinessService _questionAlternativeBusinessService;
+        public QuestionAlternativeController(QuestionAlternativeBusinessService questionAlternativeBusinessService)
         {
-            _context = context;
+            _questionAlternativeBusinessService = questionAlternativeBusinessService;
         }
 
         // Get QuestionAlternatives
         [HttpGet]
         public IEnumerable<QuestionAlternative> GetQuestionAlternatives()
         {
-            return _context.QuestionAlternatives.ToList();
+            return _questionAlternativeBusinessService.GetQuestionAlternatives();
         }
 
-        //Get one questionAlternative
+        //Get one QuestionAlternative
         [HttpGet("{id}")]
         public QuestionAlternative? GetQuestionAlternative(long id)
         {
-            var questionAlternative = _context.QuestionAlternatives.Find(id);
-            return questionAlternative;
+            return _questionAlternativeBusinessService.GetQuestionAlternative(id);
         }
 
         //Insert QuestionAlternative
         [HttpPost]
         public QuestionAlternative InsertQuestionAlternative(QuestionAlternative questionAlternative)
         {
-            _context.QuestionAlternatives.Add(questionAlternative);
-            _context.SaveChanges();
-            return questionAlternative;
+            return _questionAlternativeBusinessService.InsertQuestionAlternative(questionAlternative);
         }
 
-        //Update questionAlternative
+        //Update QuestionAlternative
         [HttpPut]
         public QuestionAlternative? UpdateQuestionAlternative(QuestionAlternative questionAlternative)
         {
-            var questionAlternativeDbo = _context.QuestionAlternatives.Find(questionAlternative.IdQuestionAlternative);
-
-            if (questionAlternativeDbo == null) return null;
-
-            questionAlternativeDbo.IdQuestionAlternative = questionAlternative.IdQuestionAlternative;
-            questionAlternativeDbo.IdQuestion = questionAlternative.IdQuestion;
-            questionAlternativeDbo.Alternative = questionAlternative.Alternative;
-            questionAlternativeDbo.IsCorret = questionAlternative.IsCorret;
-            questionAlternativeDbo.Question = questionAlternative.Question;
-
-            _context.SaveChanges();
-            return questionAlternativeDbo;
+            return _questionAlternativeBusinessService.UpdateQuestionAlternative(questionAlternative);
         }
 
-        //Delete questionAlternative
+        //Delete QuestionAlternative
         [HttpDelete("{id}")]
         public bool DeleteQuestionAlternative(long id)
         {
-            var questionAlternativeDbo = _context.QuestionAlternatives.Find(id);
-            if (questionAlternativeDbo == null) return false;
-
-            _context.QuestionAlternatives.Remove(questionAlternativeDbo);
-            _context.SaveChanges();
-            return true;
+            return _questionAlternativeBusinessService.DeleteQuestionAlternative(id);
         }
-
     }
 }

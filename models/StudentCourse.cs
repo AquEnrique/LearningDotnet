@@ -6,9 +6,9 @@ namespace NotasApi.models
     public class StudentCourse
     {
         [Key]
-        public int IdStudentCourse { get; set; }
-        public int IdStudent { get; set; }
-        public int IdTeacherCourse { get; set; }
+        public long IdStudentCourse { get; set; }
+        public long IdStudent { get; set; }
+        public long IdTeacherCourse { get; set; }
         public float? Grade1 { get; set; }
         public float? Grade2 { get; set; }
         public float? Grade3 { get; set; }

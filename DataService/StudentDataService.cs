@@ -21,7 +21,7 @@ namespace NotasApi.DataService
         }
 
         //Get one Student
-        public Student? GetStudent(int id)
+        public Student? GetStudent(long id)
         {
             var Student = _context.Students.Find(id);
             return Student;
@@ -49,7 +49,7 @@ namespace NotasApi.DataService
         }
 
         //Delete Student
-        public bool DeleteStudent(int id)
+        public bool DeleteStudent(long id)
         {
             var StudentDbo = _context.Students.Find(id);
             if (StudentDbo == null) return false;

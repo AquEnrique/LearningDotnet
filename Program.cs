@@ -22,6 +22,48 @@ builder.Services.AddDbContext<Context>(opt =>
 builder.Services.AddTransient<StudentDataService>();
 builder.Services.AddTransient<StudentBusinessService>();
 
+builder.Services.AddTransient<TeacherDataService>();
+builder.Services.AddTransient<TeacherBusinessService>();
+
+builder.Services.AddTransient<SemesterDataService>();
+builder.Services.AddTransient<SemesterBusinessService>();
+
+builder.Services.AddTransient<ProfessionalSchoolDataService>();
+builder.Services.AddTransient<ProfessionalSchoolBusinessService>();
+
+builder.Services.AddTransient<QuestionDataService>();
+builder.Services.AddTransient<QuestionBusinessService>();
+
+builder.Services.AddTransient<CareerDataService>();
+builder.Services.AddTransient<CareerBusinessService>();
+
+builder.Services.AddTransient<CourseDataService>();
+builder.Services.AddTransient<CourseBusinessService>();
+
+builder.Services.AddTransient<TeacherCourseDataService>();
+builder.Services.AddTransient<TeacherCourseBusinessService>();
+
+builder.Services.AddTransient<StudentCourseDataService>();
+builder.Services.AddTransient<StudentCourseBusinessService>();
+
+builder.Services.AddTransient<ReviewDataService>();
+builder.Services.AddTransient<ReviewBusinessService>();
+
+builder.Services.AddTransient<EvaluationDataService>();
+builder.Services.AddTransient<EvaluationBusinessService>();
+
+builder.Services.AddTransient<QuestionAlternativeDataService>();
+builder.Services.AddTransient<QuestionAlternativeBusinessService>();
+
+builder.Services.AddTransient<EvaluationXQuestionDataService>();
+builder.Services.AddTransient<EvaluationXQuestionBusinessService>();
+
+builder.Services.AddTransient<EvaluationAssignmentDataService>();
+builder.Services.AddTransient<EvaluationAssignmentBusinessService>();
+
+builder.Services.AddTransient<AnswerDataService>();
+builder.Services.AddTransient<AnswerBusinessService>();
+
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

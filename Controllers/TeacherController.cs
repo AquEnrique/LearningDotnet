@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,60 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class TeacherController : ControllerBase
     {
-        private Context _context;
-        public TeacherController(Context context)
+        private TeacherBusinessService _teacherBusinessService;
+        public TeacherController(TeacherBusinessService teacherBusinessService)
         {
-            _context = context;
+            _teacherBusinessService = teacherBusinessService;
         }
 
         // Get Teachers
         [HttpGet]
         public IEnumerable<Teacher> GetTeachers()
         {
-            return _context.Teachers.ToList();
+            return _teacherBusinessService.GetTeachers();
         }
 
         //Get one Teacher
         [HttpGet("{id}")]
         public Teacher? GetTeacher(long id)
         {
-            var Teacher = _context.Teachers.Find(id);
-            return Teacher;
+            return _teacherBusinessService.GetTeacher(id);
         }
 
         //Insert Teacher
         [HttpPost]
         public Teacher InsertTeacher(Teacher teacher)
         {
-            _context.Teachers.Add(teacher);
-            _context.SaveChanges();
-            return teacher;
+            return _teacherBusinessService.InsertTeacher(teacher);
         }
 
         //Update Teacher
         [HttpPut]
         public Teacher? UpdateTeacher(Teacher teacher)
         {
-            var TeacherDbo = _context.Teachers.Find(teacher.IdTeacher);
-
-            if (TeacherDbo == null) return null;
-
-            TeacherDbo.Name = teacher.Name;
-            TeacherDbo.LastName = teacher.LastName;
-            _context.SaveChanges();
-            return TeacherDbo;
+            return _teacherBusinessService.UpdateTeacher(teacher);
         }
 
         //Delete Teacher
         [HttpDelete("{id}")]
         public bool DeleteTeacher(long id)
         {
-            var TeacherDbo = _context.Teachers.Find(id);
-            if (TeacherDbo == null) return false;
-
-            _context.Teachers.Remove(TeacherDbo);
-            _context.SaveChanges();
-            return true;
+            return _teacherBusinessService.DeleteTeacher(id);
         }
     }
 }

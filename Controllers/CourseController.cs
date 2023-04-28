@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -11,63 +12,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class CourseController : ControllerBase
     {
-        private Context _context;
-        public CourseController(Context context)
+        private CourseBusinessService _courseBusinessService;
+        public CourseController(CourseBusinessService courseBusinessService)
         {
-            _context = context;
+            _courseBusinessService = courseBusinessService;
         }
 
         // Get Courses
         [HttpGet]
         public IEnumerable<Course> GetCourses()
         {
-            return _context.Courses.ToList();
+            return _courseBusinessService.GetCourses();
         }
 
-        //Get one course
+        //Get one Course
         [HttpGet("{id}")]
         public Course? GetCourse(long id)
         {
-            var course = _context.Courses.Find(id);
-            return course;
+            return _courseBusinessService.GetCourse(id);
         }
 
         //Insert Course
         [HttpPost]
         public Course InsertCourse(Course course)
         {
-            _context.Courses.Add(course);
-            _context.SaveChanges();
-            return course;
+            return _courseBusinessService.InsertCourse(course);
         }
 
-        //Update course
+        //Update Course
         [HttpPut]
         public Course? UpdateCourse(Course course)
         {
-            var courseDbo = _context.Courses.Find(course.IdCourse);
-
-            if (courseDbo == null) return null;
-
-            courseDbo.Name = course.Name;
-            courseDbo.IdCareer = course.IdCareer;
-            courseDbo.TeacherCourses = course.TeacherCourses;
-
-            _context.SaveChanges();
-            return courseDbo;
+            return _courseBusinessService.UpdateCourse(course);
         }
 
-        //Delete course
+        //Delete Course
         [HttpDelete("{id}")]
         public bool DeleteCourse(long id)
         {
-            var courseDbo = _context.Courses.Find(id);
-            if (courseDbo == null) return false;
-
-            _context.Courses.Remove(courseDbo);
-            _context.SaveChanges();
-            return true;
+            return _courseBusinessService.DeleteCourse(id);
         }
-
     }
 }

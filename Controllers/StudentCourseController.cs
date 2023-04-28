@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,67 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class StudentCourseController : ControllerBase
     {
-        private Context _context;
-        public StudentCourseController(Context context)
+        private StudentCourseBusinessService _studentCourseBusinessService;
+        public StudentCourseController(StudentCourseBusinessService studentCourseBusinessService)
         {
-            _context = context;
+            _studentCourseBusinessService = studentCourseBusinessService;
         }
 
         // Get StudentCourses
         [HttpGet]
         public IEnumerable<StudentCourse> GetStudentCourses()
         {
-            return _context.StudentCourses.ToList();
+            return _studentCourseBusinessService.GetStudentCourses();
         }
 
-        //Get one studentCourse
+        //Get one StudentCourse
         [HttpGet("{id}")]
         public StudentCourse? GetStudentCourse(long id)
         {
-            var studentCourse = _context.StudentCourses.Find(id);
-            return studentCourse;
+            return _studentCourseBusinessService.GetStudentCourse(id);
         }
 
         //Insert StudentCourse
         [HttpPost]
         public StudentCourse InsertStudentCourse(StudentCourse studentCourse)
         {
-            _context.StudentCourses.Add(studentCourse);
-            _context.SaveChanges();
-            return studentCourse;
+            return _studentCourseBusinessService.InsertStudentCourse(studentCourse);
         }
 
-        //| studentCourse
+        //Update StudentCourse
         [HttpPut]
         public StudentCourse? UpdateStudentCourse(StudentCourse studentCourse)
         {
-            var studentCourseDbo = _context.StudentCourses.Find(studentCourse.IdStudentCourse);
-
-            if (studentCourseDbo == null) return null;
-
-            studentCourseDbo.IdStudent = studentCourse.IdStudent;
-            studentCourseDbo.IdTeacherCourse = studentCourse.IdTeacherCourse;
-            studentCourseDbo.Grade1 = studentCourse.Grade1;
-            studentCourseDbo.Grade2 = studentCourse.Grade2;
-            studentCourseDbo.Grade3 = studentCourse.Grade3;
-            studentCourseDbo.Student = studentCourse.Student;
-            studentCourseDbo.TeacherCourse = studentCourse.TeacherCourse;
-
-            _context.SaveChanges();
-            return studentCourseDbo;
+            return _studentCourseBusinessService.UpdateStudentCourse(studentCourse);
         }
 
-        //Delete studentCourse
+        //Delete StudentCourse
         [HttpDelete("{id}")]
         public bool DeleteStudentCourse(long id)
         {
-            var studentCourseDbo = _context.StudentCourses.Find(id);
-            if (studentCourseDbo == null) return false;
-
-            _context.StudentCourses.Remove(studentCourseDbo);
-            _context.SaveChanges();
-            return true;
+            return _studentCourseBusinessService.DeleteStudentCourse(id);
         }
-
     }
 }

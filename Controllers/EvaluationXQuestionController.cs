@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,65 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class EvaluationXQuestionController : ControllerBase
     {
-        private Context _context;
-        public EvaluationXQuestionController(Context context)
+        private EvaluationXQuestionBusinessService _evaluationXQuestionBusinessService;
+        public EvaluationXQuestionController(EvaluationXQuestionBusinessService evaluationXQuestionBusinessService)
         {
-            _context = context;
+            _evaluationXQuestionBusinessService = evaluationXQuestionBusinessService;
         }
 
         // Get EvaluationXQuestions
         [HttpGet]
         public IEnumerable<EvaluationXQuestion> GetEvaluationXQuestions()
         {
-            return _context.EvaluationXQuestions.ToList();
+            return _evaluationXQuestionBusinessService.GetEvaluationXQuestions();
         }
 
-        //Get one evaluationXQuestion
+        //Get one EvaluationXQuestion
         [HttpGet("{id}")]
         public EvaluationXQuestion? GetEvaluationXQuestion(long id)
         {
-            var evaluationXQuestion = _context.EvaluationXQuestions.Find(id);
-            return evaluationXQuestion;
+            return _evaluationXQuestionBusinessService.GetEvaluationXQuestion(id);
         }
 
         //Insert EvaluationXQuestion
         [HttpPost]
         public EvaluationXQuestion InsertEvaluationXQuestion(EvaluationXQuestion evaluationXQuestion)
         {
-            _context.EvaluationXQuestions.Add(evaluationXQuestion);
-            _context.SaveChanges();
-            return evaluationXQuestion;
+            return _evaluationXQuestionBusinessService.InsertEvaluationXQuestion(evaluationXQuestion);
         }
 
-        //Update evaluationXQuestion
+        //Update EvaluationXQuestion
         [HttpPut]
         public EvaluationXQuestion? UpdateEvaluationXQuestion(EvaluationXQuestion evaluationXQuestion)
         {
-            var evaluationXQuestionDbo = _context.EvaluationXQuestions.Find(evaluationXQuestion.IdEvalXQuestion);
-
-            if (evaluationXQuestionDbo == null) return null;
-
-            evaluationXQuestionDbo.IdEvalXQuestion = evaluationXQuestion.IdEvalXQuestion;
-            evaluationXQuestionDbo.IdEvaluation = evaluationXQuestion.IdEvaluation;
-            evaluationXQuestionDbo.IdQuestion = evaluationXQuestion.IdQuestion;
-            evaluationXQuestionDbo.Evaluation = evaluationXQuestion.Evaluation;
-            evaluationXQuestionDbo.Question = evaluationXQuestion.Question;
-
-            _context.SaveChanges();
-            return evaluationXQuestionDbo;
+            return _evaluationXQuestionBusinessService.UpdateEvaluationXQuestion(evaluationXQuestion);
         }
 
-        //Delete evaluationXQuestion
+        //Delete EvaluationXQuestion
         [HttpDelete("{id}")]
         public bool DeleteEvaluationXQuestion(long id)
         {
-            var evaluationXQuestionDbo = _context.EvaluationXQuestions.Find(id);
-            if (evaluationXQuestionDbo == null) return false;
-
-            _context.EvaluationXQuestions.Remove(evaluationXQuestionDbo);
-            _context.SaveChanges();
-            return true;
+            return _evaluationXQuestionBusinessService.DeleteEvaluationXQuestion(id);
         }
-
     }
 }

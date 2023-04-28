@@ -6,8 +6,8 @@ namespace NotasApi.models
     public class QuestionAlternative
     {
         [Key]
-        public int IdQuestionAlternative { get; set; }
-        public int IdQuestion { get; set; }
+        public long IdQuestionAlternative { get; set; }
+        public long IdQuestion { get; set; }
         public string Alternative { get; set; }
         public bool IsCorret { get; set; }
 
