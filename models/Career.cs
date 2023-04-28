@@ -6,9 +6,9 @@ namespace NotasApi.models
     public class Career
     {
         [Key]
-        public int IdCareer { get; set; }
+        public long IdCareer { get; set; }
         public string Name { get; set; }
-        public int IdProfSchool { get; set; }
+        public long IdProfSchool { get; set; }
 
         [ForeignKey(nameof(IdProfSchool))]
         public ProfessionalSchool? ProfessionalSchool {get;set;}

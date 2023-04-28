@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NotasApi.Migrations
 {
     /// <inheritdoc />
-    public partial class bigmigrationgeneringalltables : Migration
+    public partial class initial_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +15,7 @@ namespace NotasApi.Migrations
                 name: "ProfessionalSchools",
                 columns: table => new
                 {
-                    IdProfSchool = table.Column<int>(type: "int", nullable: false)
+                    IdProfSchool = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -28,7 +28,7 @@ namespace NotasApi.Migrations
                 name: "Questions",
                 columns: table => new
                 {
-                    IdQuestion = table.Column<int>(type: "int", nullable: false)
+                    IdQuestion = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Question_description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TopicQuestion = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -42,7 +42,7 @@ namespace NotasApi.Migrations
                 name: "Semesters",
                 columns: table => new
                 {
-                    IdSemester = table.Column<int>(type: "int", nullable: false)
+                    IdSemester = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameSemester = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -55,7 +55,7 @@ namespace NotasApi.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    IdStudent = table.Column<int>(type: "int", nullable: false)
+                    IdStudent = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -69,7 +69,7 @@ namespace NotasApi.Migrations
                 name: "Teachers",
                 columns: table => new
                 {
-                    IdTeacher = table.Column<int>(type: "int", nullable: false)
+                    IdTeacher = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -83,10 +83,10 @@ namespace NotasApi.Migrations
                 name: "Careers",
                 columns: table => new
                 {
-                    IdCareer = table.Column<int>(type: "int", nullable: false)
+                    IdCareer = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdProfSchool = table.Column<int>(type: "int", nullable: false)
+                    IdProfSchool = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,9 +103,9 @@ namespace NotasApi.Migrations
                 name: "QuestionAlternatives",
                 columns: table => new
                 {
-                    IdQuestionAlternative = table.Column<int>(type: "int", nullable: false)
+                    IdQuestionAlternative = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdQuestion = table.Column<int>(type: "int", nullable: false),
+                    IdQuestion = table.Column<long>(type: "bigint", nullable: false),
                     Alternative = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsCorret = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -124,13 +124,13 @@ namespace NotasApi.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    IdReview = table.Column<int>(type: "int", nullable: false)
+                    IdReview = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdStudent = table.Column<int>(type: "int", nullable: false),
+                    IdStudent = table.Column<long>(type: "bigint", nullable: false),
                     TopicReview = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ReviewInterval = table.Column<int>(type: "int", nullable: false)
+                    ReviewInterval = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,9 +147,9 @@ namespace NotasApi.Migrations
                 name: "Courses",
                 columns: table => new
                 {
-                    IdCourse = table.Column<int>(type: "int", nullable: false)
+                    IdCourse = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCareer = table.Column<int>(type: "int", nullable: false),
+                    IdCareer = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -167,11 +167,11 @@ namespace NotasApi.Migrations
                 name: "TeacherCourses",
                 columns: table => new
                 {
-                    IdTeacherCourse = table.Column<int>(type: "int", nullable: false)
+                    IdTeacherCourse = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTeacher = table.Column<int>(type: "int", nullable: false),
-                    IdSemester = table.Column<int>(type: "int", nullable: false),
-                    IdCourse = table.Column<int>(type: "int", nullable: false)
+                    IdTeacher = table.Column<long>(type: "bigint", nullable: false),
+                    IdSemester = table.Column<long>(type: "bigint", nullable: false),
+                    IdCourse = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,10 +200,10 @@ namespace NotasApi.Migrations
                 name: "Evaluations",
                 columns: table => new
                 {
-                    IdEvaluation = table.Column<int>(type: "int", nullable: false)
+                    IdEvaluation = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdTeacherCourse = table.Column<int>(type: "int", nullable: true),
-                    IdReview = table.Column<int>(type: "int", nullable: true)
+                    IdTeacherCourse = table.Column<long>(type: "bigint", nullable: true),
+                    IdReview = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,10 +224,10 @@ namespace NotasApi.Migrations
                 name: "StudentCourses",
                 columns: table => new
                 {
-                    IdStudentCourse = table.Column<int>(type: "int", nullable: false)
+                    IdStudentCourse = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdStudent = table.Column<int>(type: "int", nullable: false),
-                    IdTeacherCourse = table.Column<int>(type: "int", nullable: false),
+                    IdStudent = table.Column<long>(type: "bigint", nullable: false),
+                    IdTeacherCourse = table.Column<long>(type: "bigint", nullable: false),
                     Grade1 = table.Column<float>(type: "real", nullable: true),
                     Grade2 = table.Column<float>(type: "real", nullable: true),
                     Grade3 = table.Column<float>(type: "real", nullable: true)
@@ -253,12 +253,12 @@ namespace NotasApi.Migrations
                 name: "EvaluationAssignments",
                 columns: table => new
                 {
-                    IdEvaluationAssignment = table.Column<int>(type: "int", nullable: false)
+                    IdEvaluationAssignment = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEvaluation = table.Column<int>(type: "int", nullable: false),
-                    IdStudent = table.Column<int>(type: "int", nullable: false),
+                    IdEvaluation = table.Column<long>(type: "bigint", nullable: false),
+                    IdStudent = table.Column<long>(type: "bigint", nullable: false),
                     Note = table.Column<float>(type: "real", nullable: true),
-                    EvaluationIdEvaluation = table.Column<int>(type: "int", nullable: true)
+                    EvaluationIdEvaluation = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -280,10 +280,10 @@ namespace NotasApi.Migrations
                 name: "EvaluationXQuestions",
                 columns: table => new
                 {
-                    IdEvalXQuestion = table.Column<int>(type: "int", nullable: false)
+                    IdEvalXQuestion = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEvaluation = table.Column<int>(type: "int", nullable: false),
-                    IdQuestion = table.Column<int>(type: "int", nullable: false)
+                    IdEvaluation = table.Column<long>(type: "bigint", nullable: false),
+                    IdQuestion = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -306,11 +306,11 @@ namespace NotasApi.Migrations
                 name: "Answers",
                 columns: table => new
                 {
-                    IdAnswer = table.Column<int>(type: "int", nullable: false)
+                    IdAnswer = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdEvaluationAssignment = table.Column<int>(type: "int", nullable: false),
-                    IdQuestionAlternative = table.Column<int>(type: "int", nullable: false),
-                    EvaluationAssignmentIdEvaluationAssignment = table.Column<int>(type: "int", nullable: true)
+                    IdEvaluationAssignment = table.Column<long>(type: "bigint", nullable: false),
+                    IdQuestionAlternative = table.Column<long>(type: "bigint", nullable: false),
+                    EvaluationAssignmentIdEvaluationAssignment = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {

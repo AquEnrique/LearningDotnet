@@ -24,20 +24,20 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Answer", b =>
                 {
-                    b.Property<int>("IdAnswer")
+                    b.Property<long>("IdAnswer")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAnswer"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdAnswer"));
 
-                    b.Property<int?>("EvaluationAssignmentIdEvaluationAssignment")
-                        .HasColumnType("int");
+                    b.Property<long?>("EvaluationAssignmentIdEvaluationAssignment")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdEvaluationAssignment")
-                        .HasColumnType("int");
+                    b.Property<long>("IdEvaluationAssignment")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdQuestionAlternative")
-                        .HasColumnType("int");
+                    b.Property<long>("IdQuestionAlternative")
+                        .HasColumnType("bigint");
 
                     b.HasKey("IdAnswer");
 
@@ -50,14 +50,14 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Career", b =>
                 {
-                    b.Property<int>("IdCareer")
+                    b.Property<long>("IdCareer")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCareer"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdCareer"));
 
-                    b.Property<int>("IdProfSchool")
-                        .HasColumnType("int");
+                    b.Property<long>("IdProfSchool")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -72,14 +72,14 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Course", b =>
                 {
-                    b.Property<int>("IdCourse")
+                    b.Property<long>("IdCourse")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCourse"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdCourse"));
 
-                    b.Property<int>("IdCareer")
-                        .HasColumnType("int");
+                    b.Property<long>("IdCareer")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -94,17 +94,17 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Evaluation", b =>
                 {
-                    b.Property<int>("IdEvaluation")
+                    b.Property<long>("IdEvaluation")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEvaluation"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdEvaluation"));
 
-                    b.Property<int?>("IdReview")
-                        .HasColumnType("int");
+                    b.Property<long?>("IdReview")
+                        .HasColumnType("bigint");
 
-                    b.Property<int?>("IdTeacherCourse")
-                        .HasColumnType("int");
+                    b.Property<long?>("IdTeacherCourse")
+                        .HasColumnType("bigint");
 
                     b.HasKey("IdEvaluation");
 
@@ -117,20 +117,20 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.EvaluationAssignment", b =>
                 {
-                    b.Property<int>("IdEvaluationAssignment")
+                    b.Property<long>("IdEvaluationAssignment")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEvaluationAssignment"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdEvaluationAssignment"));
 
-                    b.Property<int?>("EvaluationIdEvaluation")
-                        .HasColumnType("int");
+                    b.Property<long?>("EvaluationIdEvaluation")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdEvaluation")
-                        .HasColumnType("int");
+                    b.Property<long>("IdEvaluation")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdStudent")
-                        .HasColumnType("int");
+                    b.Property<long>("IdStudent")
+                        .HasColumnType("bigint");
 
                     b.Property<float?>("Note")
                         .HasColumnType("real");
@@ -146,17 +146,17 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.EvaluationXQuestion", b =>
                 {
-                    b.Property<int>("IdEvalXQuestion")
+                    b.Property<long>("IdEvalXQuestion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEvalXQuestion"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdEvalXQuestion"));
 
-                    b.Property<int>("IdEvaluation")
-                        .HasColumnType("int");
+                    b.Property<long>("IdEvaluation")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdQuestion")
-                        .HasColumnType("int");
+                    b.Property<long>("IdQuestion")
+                        .HasColumnType("bigint");
 
                     b.HasKey("IdEvalXQuestion");
 
@@ -169,11 +169,11 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.ProfessionalSchool", b =>
                 {
-                    b.Property<int>("IdProfSchool")
+                    b.Property<long>("IdProfSchool")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProfSchool"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdProfSchool"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -186,11 +186,11 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Question", b =>
                 {
-                    b.Property<int>("IdQuestion")
+                    b.Property<long>("IdQuestion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdQuestion"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdQuestion"));
 
                     b.Property<string>("Question_description")
                         .IsRequired()
@@ -207,18 +207,18 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.QuestionAlternative", b =>
                 {
-                    b.Property<int>("IdQuestionAlternative")
+                    b.Property<long>("IdQuestionAlternative")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdQuestionAlternative"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdQuestionAlternative"));
 
                     b.Property<string>("Alternative")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdQuestion")
-                        .HasColumnType("int");
+                    b.Property<long>("IdQuestion")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsCorret")
                         .HasColumnType("bit");
@@ -232,20 +232,20 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Review", b =>
                 {
-                    b.Property<int>("IdReview")
+                    b.Property<long>("IdReview")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdReview"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdReview"));
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdStudent")
-                        .HasColumnType("int");
+                    b.Property<long>("IdStudent")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("ReviewInterval")
-                        .HasColumnType("int");
+                    b.Property<long>("ReviewInterval")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -263,11 +263,11 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Semester", b =>
                 {
-                    b.Property<int>("IdSemester")
+                    b.Property<long>("IdSemester")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSemester"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdSemester"));
 
                     b.Property<string>("NameSemester")
                         .IsRequired()
@@ -280,11 +280,11 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Student", b =>
                 {
-                    b.Property<int>("IdStudent")
+                    b.Property<long>("IdStudent")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdStudent"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdStudent"));
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -301,11 +301,11 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.StudentCourse", b =>
                 {
-                    b.Property<int>("IdStudentCourse")
+                    b.Property<long>("IdStudentCourse")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdStudentCourse"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdStudentCourse"));
 
                     b.Property<float?>("Grade1")
                         .HasColumnType("real");
@@ -316,11 +316,11 @@ namespace NotasApi.Migrations
                     b.Property<float?>("Grade3")
                         .HasColumnType("real");
 
-                    b.Property<int>("IdStudent")
-                        .HasColumnType("int");
+                    b.Property<long>("IdStudent")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdTeacherCourse")
-                        .HasColumnType("int");
+                    b.Property<long>("IdTeacherCourse")
+                        .HasColumnType("bigint");
 
                     b.HasKey("IdStudentCourse");
 
@@ -333,11 +333,11 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.Teacher", b =>
                 {
-                    b.Property<int>("IdTeacher")
+                    b.Property<long>("IdTeacher")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTeacher"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdTeacher"));
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -354,20 +354,20 @@ namespace NotasApi.Migrations
 
             modelBuilder.Entity("NotasApi.models.TeacherCourse", b =>
                 {
-                    b.Property<int>("IdTeacherCourse")
+                    b.Property<long>("IdTeacherCourse")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTeacherCourse"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdTeacherCourse"));
 
-                    b.Property<int>("IdCourse")
-                        .HasColumnType("int");
+                    b.Property<long>("IdCourse")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdSemester")
-                        .HasColumnType("int");
+                    b.Property<long>("IdSemester")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("IdTeacher")
-                        .HasColumnType("int");
+                    b.Property<long>("IdTeacher")
+                        .HasColumnType("bigint");
 
                     b.HasKey("IdTeacherCourse");
 

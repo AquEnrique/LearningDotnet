@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NotasApi.models;
+using NotasApi.BusinessService;
 
 namespace NotasApi.Controllers
 {
@@ -7,59 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class SemesterController : ControllerBase
     {
-        private Context _context;
-        public SemesterController(Context context)
+        private SemesterBusinessService _semesterBusinessService;
+        public SemesterController(SemesterBusinessService semesterBusinessService)
         {
-            _context = context;
+            _semesterBusinessService = semesterBusinessService;
         }
 
         // Get Semesters
         [HttpGet]
         public IEnumerable<Semester> GetSemesters()
         {
-            return _context.Semesters.ToList();
+            return _semesterBusinessService.GetSemesters();
         }
 
         //Get one Semester
         [HttpGet("{id}")]
         public Semester? GetSemester(long id)
         {
-            var Semester = _context.Semesters.Find(id);
-            return Semester;
+            return _semesterBusinessService.GetSemester(id);
         }
 
         //Insert Semester
         [HttpPost]
         public Semester InsertSemester(Semester semester)
         {
-            _context.Semesters.Add(semester);
-            _context.SaveChanges();
-            return semester;
+            return _semesterBusinessService.InsertSemester(semester);
         }
 
         //Update Semester
         [HttpPut]
         public Semester? UpdateSemester(Semester semester)
         {
-            var SemesterDbo = _context.Semesters.Find(semester.IdSemester);
-
-            if (SemesterDbo == null) return null;
-
-            SemesterDbo.NameSemester = semester.NameSemester;
-            _context.SaveChanges();
-            return SemesterDbo;
+            return _semesterBusinessService.UpdateSemester(semester);
         }
 
         //Delete Semester
         [HttpDelete("{id}")]
         public bool DeleteSemester(long id)
         {
-            var SemesterDbo = _context.Semesters.Find(id);
-            if (SemesterDbo == null) return false;
-
-            _context.Semesters.Remove(SemesterDbo);
-            _context.SaveChanges();
-            return true;
+            return _semesterBusinessService.DeleteSemester(id);
         }
     }
 }

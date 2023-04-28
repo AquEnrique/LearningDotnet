@@ -40,7 +40,7 @@ namespace NotasApi.BusinessService
         }
 
         //Delete Student
-        public bool DeleteStudent(int id)
+        public bool DeleteStudent(long id)
         {
             return _studentDataService.DeleteStudent(id);
         }

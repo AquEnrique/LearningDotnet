@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,59 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class ProfessionalSchoolController : ControllerBase
     {
-        private Context _context;
-        public ProfessionalSchoolController(Context context)
+        private ProfessionalSchoolBusinessService _professionalSchoolBusinessService;
+        public ProfessionalSchoolController(ProfessionalSchoolBusinessService professionalSchoolBusinessService)
         {
-            _context = context;
+            _professionalSchoolBusinessService = professionalSchoolBusinessService;
         }
 
         // Get ProfessionalSchools
         [HttpGet]
         public IEnumerable<ProfessionalSchool> GetProfessionalSchools()
         {
-            return _context.ProfessionalSchools.ToList();
+            return _professionalSchoolBusinessService.GetProfessionalSchools();
         }
 
         //Get one ProfessionalSchool
         [HttpGet("{id}")]
         public ProfessionalSchool? GetProfessionalSchool(long id)
         {
-            var ProfessionalSchool = _context.ProfessionalSchools.Find(id);
-            return ProfessionalSchool;
+            return _professionalSchoolBusinessService.GetProfessionalSchool(id);
         }
 
         //Insert ProfessionalSchool
         [HttpPost]
         public ProfessionalSchool InsertProfessionalSchool(ProfessionalSchool professionalSchool)
         {
-            _context.ProfessionalSchools.Add(professionalSchool);
-            _context.SaveChanges();
-            return professionalSchool;
+            return _professionalSchoolBusinessService.InsertProfessionalSchool(professionalSchool);
         }
 
         //Update ProfessionalSchool
         [HttpPut]
         public ProfessionalSchool? UpdateProfessionalSchool(ProfessionalSchool professionalSchool)
         {
-            var ProfessionalSchoolDbo = _context.ProfessionalSchools.Find(professionalSchool.IdProfSchool);
-
-            if (ProfessionalSchoolDbo == null) return null;
-
-            ProfessionalSchoolDbo.Name = professionalSchool.Name;
-            _context.SaveChanges();
-            return ProfessionalSchoolDbo;
+            return _professionalSchoolBusinessService.UpdateProfessionalSchool(professionalSchool);
         }
 
         //Delete ProfessionalSchool
         [HttpDelete("{id}")]
-        public bool DeleteProfessionalSchool(int id)
+        public bool DeleteProfessionalSchool(long id)
         {
-            var ProfessionalSchoolDbo = _context.ProfessionalSchools.Find(id);
-            if (ProfessionalSchoolDbo == null) return false;
-
-            _context.ProfessionalSchools.Remove(ProfessionalSchoolDbo);
-            _context.SaveChanges();
-            return true;
+            return _professionalSchoolBusinessService.DeleteProfessionalSchool(id);
         }
     }
 }

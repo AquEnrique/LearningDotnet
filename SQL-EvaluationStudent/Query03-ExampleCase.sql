@@ -99,7 +99,7 @@ VALUES
 
 --DROP PROCEDURE CalculateEvaluationNote
 CREATE PROCEDURE CalculateEvaluationNote
-    @IdEvaluation int
+    @IdEvaluation long
 AS
 BEGIN
 	Update
@@ -137,7 +137,7 @@ exec CalculateEvaluationNote 1
 ------
 -- Generate function to view  failed by examn
 CREATE FUNCTION funcGetWrongAnswersEval (
-    @IdEvaluation INT
+    @IdEvaluation long
 )
 RETURNS TABLE
 AS
@@ -159,7 +159,7 @@ from funcGetWrongAnswersEval(1)
 -- Generate a procedure to create reviews of eval
 --DROP PROCEDURE GenerateReviewOfEval
 CREATE PROCEDURE GenerateReviewOfEval
-	@IdEval int, @ReviewInterval int
+	@IdEval long, @ReviewInterval long
 AS
 BEGIN
 	DECLARE @presentDAY date = CAST(GETDATE() AS Date );

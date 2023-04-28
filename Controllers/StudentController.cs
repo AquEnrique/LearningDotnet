@@ -20,12 +20,12 @@ namespace NotasApi.Controllers
         {
             return _studentBusinessService.GetStudents();
         }
-//         //Get one Student
-//         [HttpGet]
-//         public Student? GetStudent(long id)
-//         {
-//             return _studentBusinessService.GetStudent(id);
-//         }
+        //Get one Student
+        [HttpGet("{id}")]
+        public Student? GetStudent(long id)
+        {
+            return _studentBusinessService.GetStudent(id);
+        }
 
         //Insert Student
         [HttpPost]
@@ -43,7 +43,7 @@ namespace NotasApi.Controllers
 
         //Delete Student
         [HttpDelete]
-        public bool DeleteStudent(int id)
+        public bool DeleteStudent(long id)
         {
             return _studentBusinessService.DeleteStudent(id);
         }

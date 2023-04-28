@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,67 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class ReviewController : ControllerBase
     {
-        private Context _context;
-        public ReviewController(Context context)
+        private ReviewBusinessService _reviewBusinessService;
+        public ReviewController(ReviewBusinessService reviewBusinessService)
         {
-            _context = context;
+            _reviewBusinessService = reviewBusinessService;
         }
 
         // Get Reviews
         [HttpGet]
         public IEnumerable<Review> GetReviews()
         {
-            return _context.Reviews.ToList();
+            return _reviewBusinessService.GetReviews();
         }
 
-        //Get one review
+        //Get one Review
         [HttpGet("{id}")]
         public Review? GetReview(long id)
         {
-            var review = _context.Reviews.Find(id);
-            return review;
+            return _reviewBusinessService.GetReview(id);
         }
 
         //Insert Review
         [HttpPost]
         public Review InsertReview(Review review)
         {
-            _context.Reviews.Add(review);
-            _context.SaveChanges();
-            return review;
+            return _reviewBusinessService.InsertReview(review);
         }
 
-        //Update review
+        //Update Review
         [HttpPut]
         public Review? UpdateReview(Review review)
         {
-            var reviewDbo = _context.Reviews.Find(review.IdReview);
-
-            if (reviewDbo == null) return null;
-
-            reviewDbo.IdStudent = review.IdStudent;
-            reviewDbo.TopicReview = review.TopicReview;
-            reviewDbo.StartDate = review.StartDate;
-            reviewDbo.EndDate = review.EndDate;
-            reviewDbo.ReviewInterval = review.ReviewInterval;
-            reviewDbo.Student = review.Student;
-            reviewDbo.Evaluations = review.Evaluations;
-
-            _context.SaveChanges();
-            return reviewDbo;
+            return _reviewBusinessService.UpdateReview(review);
         }
 
-        //Delete review
+        //Delete Review
         [HttpDelete("{id}")]
         public bool DeleteReview(long id)
         {
-            var reviewDbo = _context.Reviews.Find(id);
-            if (reviewDbo == null) return false;
-
-            _context.Reviews.Remove(reviewDbo);
-            _context.SaveChanges();
-            return true;
+            return _reviewBusinessService.DeleteReview(id);
         }
-
     }
 }

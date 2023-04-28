@@ -6,8 +6,8 @@ namespace NotasApi.models
     public class Course
     {
         [Key]
-        public int IdCourse { get; set; }
-        public int IdCareer { get; set; }
+        public long IdCourse { get; set; }
+        public long IdCareer { get; set; }
         public string Name { get; set; }
         
         [ForeignKey(nameof(IdCareer))]

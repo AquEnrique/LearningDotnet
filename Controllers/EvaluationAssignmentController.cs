@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -7,61 +8,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class EvaluationAssignmentController : ControllerBase
     {
-        private Context _context;
-        public EvaluationAssignmentController(Context context)
+        private EvaluationAssignmentBusinessService _evaluationAssignmentBusinessService;
+        public EvaluationAssignmentController(EvaluationAssignmentBusinessService evaluationAssignmentBusinessService)
         {
-            _context = context;
+            _evaluationAssignmentBusinessService = evaluationAssignmentBusinessService;
         }
 
         // Get EvaluationAssignments
         [HttpGet]
         public IEnumerable<EvaluationAssignment> GetEvaluationAssignments()
         {
-            return _context.EvaluationAssignments.ToList();
+            return _evaluationAssignmentBusinessService.GetEvaluationAssignments();
         }
 
-        //Get one evaluationAssignment
+        //Get one EvaluationAssignment
         [HttpGet("{id}")]
         public EvaluationAssignment? GetEvaluationAssignment(long id)
         {
-            var evaluationAssignment = _context.EvaluationAssignments.Find(id);
-            return evaluationAssignment;
+            return _evaluationAssignmentBusinessService.GetEvaluationAssignment(id);
         }
 
         //Insert EvaluationAssignment
         [HttpPost]
         public EvaluationAssignment InsertEvaluationAssignment(EvaluationAssignment evaluationAssignment)
         {
-            _context.EvaluationAssignments.Add(evaluationAssignment);
-            _context.SaveChanges();
-            return evaluationAssignment;
+            return _evaluationAssignmentBusinessService.InsertEvaluationAssignment(evaluationAssignment);
         }
 
-        //Update evaluationAssignment
+        //Update EvaluationAssignment
         [HttpPut]
         public EvaluationAssignment? UpdateEvaluationAssignment(EvaluationAssignment evaluationAssignment)
         {
-            var evaluationAssignmentDbo = _context.EvaluationAssignments.Find(evaluationAssignment.IdEvaluationAssignment);
-
-            if (evaluationAssignmentDbo == null) return null;
-
-            /*evaluationAssignmentDbo.Name = evaluationAssignment.Name;
-            evaluationAssignmentDbo.IdProfSchool = evaluationAssignment.IdProfSchool;*/
-            _context.SaveChanges();
-            return evaluationAssignmentDbo;
+            return _evaluationAssignmentBusinessService.UpdateEvaluationAssignment(evaluationAssignment);
         }
 
-        //Delete evaluationAssignment
+        //Delete EvaluationAssignment
         [HttpDelete("{id}")]
         public bool DeleteEvaluationAssignment(long id)
         {
-            var evaluationAssignmentDbo = _context.EvaluationAssignments.Find(id);
-            if (evaluationAssignmentDbo == null) return false;
-
-            _context.EvaluationAssignments.Remove(evaluationAssignmentDbo);
-            _context.SaveChanges();
-            return true;
+            return _evaluationAssignmentBusinessService.DeleteEvaluationAssignment(id);
         }
-
     }
 }

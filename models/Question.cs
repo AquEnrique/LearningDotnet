@@ -5,7 +5,7 @@ namespace NotasApi.models
     public class Question
     {
         [Key]
-        public int IdQuestion { get; set; }
+        public long IdQuestion { get; set; }
         public string Question_description { get; set; }
         public string TopicQuestion { get; set; }
 

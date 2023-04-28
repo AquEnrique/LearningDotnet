@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NotasApi.BusinessService;
 using NotasApi.models;
 
 namespace NotasApi.Controllers
@@ -11,61 +12,45 @@ namespace NotasApi.Controllers
     [Route("[controller]")]
     public class CareerController : ControllerBase
     {
-        private Context _context;
-        public CareerController(Context context)
+        private CareerBusinessService _careerBusinessService;
+        public CareerController(CareerBusinessService careerBusinessService)
         {
-            _context = context;
+            _careerBusinessService = careerBusinessService;
         }
 
         // Get Careers
         [HttpGet]
         public IEnumerable<Career> GetCareers()
         {
-            return _context.Careers.ToList();
+            return _careerBusinessService.GetCareers();
         }
 
-        //Get one career
+        //Get one Career
         [HttpGet("{id}")]
         public Career? GetCareer(long id)
         {
-            var career = _context.Careers.Find(id);
-            return career;
+            return _careerBusinessService.GetCareer(id);
         }
 
         //Insert Career
         [HttpPost]
         public Career InsertCareer(Career career)
         {
-            _context.Careers.Add(career);
-            _context.SaveChanges();
-            return career;
+            return _careerBusinessService.InsertCareer(career);
         }
 
-        //Update career
+        //Update Career
         [HttpPut]
         public Career? UpdateCareer(Career career)
         {
-            var careerDbo = _context.Careers.Find(career.IdCareer);
-
-            if (careerDbo == null) return null;
-
-            careerDbo.Name = career.Name;
-            careerDbo.IdProfSchool = career.IdProfSchool;
-            _context.SaveChanges();
-            return careerDbo;
+            return _careerBusinessService.UpdateCareer(career);
         }
 
-        //Delete career
+        //Delete Career
         [HttpDelete("{id}")]
         public bool DeleteCareer(long id)
         {
-            var careerDbo = _context.Careers.Find(id);
-            if (careerDbo == null) return false;
-
-            _context.Careers.Remove(careerDbo);
-            _context.SaveChanges();
-            return true;
+            return _careerBusinessService.DeleteCareer(id);
         }
-
     }
 }
